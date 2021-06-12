@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Create from "../User/Create"
 import Footer from "../shared/Footer";
 import Loading from "../shared/Loader";
+import InternalServer from "../ErrorPages/InternalServer";
 
 const initialState = {
     showEdit: false,
@@ -65,8 +66,8 @@ class List extends Component {
     render() {
         const { users, error, pending } = this.props;
 
-        if (error && error.length) {
-            return <div>Please check Your NetworkConnection</div>;
+        if (error && error.message == 'Network Error') {
+            return <InternalServer/>
         }
         else if (pending) {
           return  <Loading loading={pending} />
