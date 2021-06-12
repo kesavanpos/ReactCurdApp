@@ -10,7 +10,7 @@ const initialState = {
     lastname: "",
     picture: "",
     errors: [],
-    isUpdated:false
+    isUpdated: false
 }
 
 const validationStyle = {
@@ -27,11 +27,13 @@ class Create extends Component {
         this.state = initialState;
     }
 
-    componentDidUpdate() {
-        // set the value from props to create/update form
-        this.firstnameinput.value = this.props.user.firstname;
-        this.lastnameinput.value = this.props.user.lastname;
-        this.pictureinput.value = this.props.user.picture;
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.errors.length <= 0 && this.props.edit) {
+            // set the value from props to create/update form
+            this.firstnameinput.value = this.props.user.firstname;
+            this.lastnameinput.value = this.props.user.lastname;
+            this.pictureinput.value = this.props.user.picture;
+        }
     }
 
     handleValidation = () => {
@@ -59,8 +61,8 @@ class Create extends Component {
         return formIsValid;
     }
 
-    handleChange = (e) =>{
-        this.setState({isUpdated:true});
+    handleChange = (e) => {
+        this.setState({ isUpdated: true });
     }
 
     handleAddUser = (e) => {
@@ -82,7 +84,7 @@ class Create extends Component {
                 this.props.createUser(formValue);
                 window.location.href = "/";
             }
-            else if(this.state.isUpdated) {
+            else if (this.state.isUpdated) {
                 this.props.updateUser(this.props.user.id, formValue);
                 window.location.href = "/";
             }
@@ -96,22 +98,22 @@ class Create extends Component {
                 <Row>
                     <Col>
                         <Form.Control name="firstname" placeholder="First Name"
-                            ref={myinput => (this.firstnameinput = myinput)} 
-                            onKeyDown={(e) => {this.handleChange(e)}}
-                            />
+                            ref={myinput => (this.firstnameinput = myinput)}
+                            onBlur={this.handleChange}
+                        />
                         <span style={validationStyle}>{this.state.errors["firstname"]}</span>
                     </Col>
                     <Col>
                         <Form.Control name="lastname" placeholder="Last Name"
                             ref={myinput => (this.lastnameinput = myinput)}
-                            onKeyDown={(e) => {this.handleChange(e)}}
+                            onBlur={this.handleChange}
                         />
                         <span style={validationStyle}>{this.state.errors["lastname"]}</span>
                     </Col>
                     <Col>
                         <Form.Control name="picture" placeholder="Picture"
                             ref={myinput => (this.pictureinput = myinput)}
-                            onKeyDown={(e) => {this.handleChange(e)}}
+                            onBlur={this.handleChange}
                         />
                         <span style={validationStyle}>{this.state.errors["picture"]}</span>
                     </Col>
