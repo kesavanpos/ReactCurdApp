@@ -27,8 +27,11 @@ class Create extends Component {
         this.state = initialState;
     }
     
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.errors.length <= 0 && this.props.edit) {
+    componentDidUpdate(prevProps, prevState) {        
+        if (!this.state.isUpdated && this.props.edit) {
+            this.firstnameinput.value = '';
+            this.lastnameinput.value = '';
+            this.pictureinput.value = '';
             // set the value from props to create/update form
             this.firstnameinput.value = (this.firstnameinput.value === '') ?
                                         this.props.user.firstname :this.firstnameinput.value;
