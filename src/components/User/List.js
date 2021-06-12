@@ -60,6 +60,7 @@ class List extends Component {
         if(this.state.selDeleteUserId !== '')
         {
             this.props.deleteUser(this.state.selDeleteUserId);
+            window.location.href="/";
         }
     }
 
