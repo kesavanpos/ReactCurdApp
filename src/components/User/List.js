@@ -66,7 +66,7 @@ class List extends Component {
     render() {
         const { users, error, pending } = this.props;
 
-        if (error && error.message == 'Network Error') {
+        if (error && error.message === 'Network Error') {
             return <InternalServer/>
         }
         else if (pending) {
