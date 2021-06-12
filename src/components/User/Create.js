@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import { createUser, updateUser } from "../../actions/user";
+import { createUser, updateUser,fetchUser } from "../../actions/user";
 import { connect } from 'react-redux';
 import * as validation from "../constants";
 
@@ -87,12 +87,12 @@ class Create extends Component {
             }
 
             if (this.props.user.id === '') {
-                this.props.createUser(formValue);
-                window.location.href = "/";
+                this.props.createUser(formValue); 
+                this.props.fetchUser();               
             }
             else if (this.state.isUpdated) {
-                this.props.updateUser(this.props.user.id, formValue);
-                window.location.href = "/";
+                this.props.updateUser(this.props.user.id, formValue);                
+                window.location.href="/";
             }
         }
     }
@@ -141,4 +141,4 @@ class Create extends Component {
 
 }
 
-export default connect(null, { createUser, updateUser })(Create);
+export default connect(null, { createUser, updateUser,fetchUser })(Create);
