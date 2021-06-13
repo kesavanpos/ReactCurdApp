@@ -1,8 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+
 
 import UserDataService from "./services/user.service";
 
-test('fetch User', async () => {
+test('fetch Users should not contain error', async () => {
   await expect(UserDataService.getAll()).resolves.not.toBe('error');
+});
+
+test('check whether users is not an empty array', async () => {        
+  await expect(UserDataService.getAll()).not.toBe([]);
 });
